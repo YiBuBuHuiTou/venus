@@ -21,6 +21,7 @@
         <module>auth</module>
         <!-- 门户 -->
         <module>portal</module>
+        <module>common</module>
     </modules>
 
     <properties>
@@ -29,6 +30,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <venus.auth.version>0.0.1-SNAPSHOT</venus.auth.version>
         <venus.portal.version>0.0.1-SNAPSHOT</venus.portal.version>
+        <venus.common.version>1.0-SNAPSHOT</venus.common.version>
     </properties>
 
     <dependencies>
@@ -57,6 +59,11 @@
                 <groupId>com.cxd.venus</groupId>
                 <artifactId>portal</artifactId>
                 <version>${venus.portal.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cxd.venus</groupId>
+                <artifactId>common</artifactId>
+                <version>1.0-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
