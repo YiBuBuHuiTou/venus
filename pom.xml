@@ -54,7 +54,6 @@
                 <artifactId>auth</artifactId>
                 <version>${venus.auth.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>com.cxd.venus</groupId>
                 <artifactId>portal</artifactId>
