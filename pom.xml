@@ -31,6 +31,8 @@
         <venus.auth.version>0.0.1-SNAPSHOT</venus.auth.version>
         <venus.portal.version>0.0.1-SNAPSHOT</venus.portal.version>
         <venus.common.version>1.0-SNAPSHOT</venus.common.version>
+        <!-- spring cloud alibaba version -->
+        <project-version>2.2.1.RELEASE</project-version>
     </properties>
 
     <dependencies>
@@ -64,10 +66,20 @@
                 <artifactId>common</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
+            <!-- spring cloud -->
+
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>{project-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
         </dependencies>
+
+
     </dependencyManagement>
-
-
     <build>
         <plugins>
             <plugin>

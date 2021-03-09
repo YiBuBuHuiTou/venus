@@ -1,4 +1,4 @@
-package com.cxd.venus.auth.config;
+package com.cxd.venus.auth.config.oauth2;
 
 import org.springframework.context.annotation.Configuration;
 
