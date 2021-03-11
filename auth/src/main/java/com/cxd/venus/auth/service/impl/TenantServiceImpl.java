@@ -1,7 +1,7 @@
 package com.cxd.venus.auth.service.impl;
 
 import com.cxd.venus.auth.bean.AuthBean;
-import com.cxd.venus.auth.service.ResponseService;
+import com.cxd.venus.auth.service.TenantService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * @Version 1.0
  **/
 @Service
-public class ResponseServiceImpl implements ResponseService {
+public class TenantServiceImpl implements TenantService {
 
     /**
      * 包装返回值

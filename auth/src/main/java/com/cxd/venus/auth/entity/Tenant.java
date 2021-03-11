@@ -3,6 +3,7 @@ package com.cxd.venus.auth.entity;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.context.annotation.Primary;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,12 +12,12 @@ import java.util.Date;
 /**
  * @Author YiBuBuHuiTou
  * @Description
- * @Date 2021/3/9 22:38
+ * @Date 2021/3/11 20:21
  * @Version 1.0
  **/
 @Entity
-@Table(name = "account")
-public class Account implements Serializable {
+@Table(name = "tenant")
+public class Tenant implements Serializable {
 
     // 序列化类版本号
     private static final long serialVersionUID = 1L;
@@ -24,43 +25,30 @@ public class Account implements Serializable {
     @Id
     @GenericGenerator(name = "idGenerator", strategy = "uuid")
     @GeneratedValue(generator = "idGenerator")
-    @Column(name = "account_id", updatable = false)
-    private String accountId;
-
-    @Column(name = "tenant_id", nullable = false)
+    @Column(name = "tenant_id", nullable = false, updatable = false)
     private String tenantId;
 
-    @Column(name = "account_name", unique = true, nullable = false)
-    private String accountName;
+    @Column(name = "tenant_name", nullable = false)
+    private String tenantName;
+
+    @Column(name = "owner", nullable = false)
+    private String owner;
 
     @Column(name = "description")
     private String description;
-
-    @Column(name = "password")
-    private String password;
-
-    @Column(name = "security_key")
-    private String securityKey;
-
-    @CreationTimestamp
-    @Column(name = "create_date", updatable = false)
-    private Date createDate;
 
     @Column(name = "update_date")
     @UpdateTimestamp
     private Date updateDate;
 
+    @Column(name = "create_date", updatable = false)
+    @CreationTimestamp
+    private Date createDate;
+
+
     /**********************************************************************************************************************************************************/
     /*******************************************   Getter And Setter   ****************************************************************************************/
     /**********************************************************************************************************************************************************/
-
-    public String getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
-    }
 
     public String getTenantId() {
         return tenantId;
@@ -70,16 +58,20 @@ public class Account implements Serializable {
         this.tenantId = tenantId;
     }
 
-    public String getAccountName() {
-        return accountName;
+    public String getTenantName() {
+        return tenantName;
     }
 
-    public void setAccountName(String accountName) {
-        this.accountName = accountName;
+    public void setTenantName(String tenantName) {
+        this.tenantName = tenantName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
     public String getDescription() {
@@ -90,16 +82,12 @@ public class Account implements Serializable {
         this.description = description;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public String getSecurityKey() {
-        return securityKey;
-    }
-
-    public void setSecurityKey(String securityKey) {
-        this.securityKey = securityKey;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
     public Date getCreateDate() {
@@ -108,13 +96,5 @@ public class Account implements Serializable {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
-    }
-
-    public Date getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
     }
 }

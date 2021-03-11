@@ -108,21 +108,32 @@ public class CryptoUtils {
      * @param content   需要加密的内容
      * @return
      */
-    public static String hashAlgorithm(ENCRYPT_TYPE algorithm, String content) throws NoSuchAlgorithmException {
+    public static String hashAlgorithm(ENCRYPT_TYPE algorithm, String content)  {
         String result = null;
         switch (algorithm) {
             case MD5:
+                try {
                 // 生成一个MD5摘要
                 MessageDigest messageDigest_md5 = MessageDigest.getInstance("MD5");
                 // 使用指定字节数组更新摘要
                 messageDigest_md5.update(content.getBytes());
                 // 最终生成摘要并转为16进制
                 result = new BigInteger(1, messageDigest_md5.digest()).toString(16);
+                } catch (NoSuchAlgorithmException e) {
+                    //TODO
+                    e.printStackTrace();
+                }
                 break;
             case SHA256:
-                MessageDigest messageDigest_sha256 = MessageDigest.getInstance("SHA-256");
-                messageDigest_sha256.update(content.getBytes());
-                result = new BigInteger(1, messageDigest_sha256.digest()).toString(16);
+                try {
+                    MessageDigest messageDigest_sha256 = MessageDigest.getInstance("SHA-256");
+                    messageDigest_sha256.update(content.getBytes());
+                    result = new BigInteger(1, messageDigest_sha256.digest()).toString(16);
+                } catch (NoSuchAlgorithmException e) {
+                    //TODO
+                    e.printStackTrace();
+                }
+
                 break;
             default: break;
 

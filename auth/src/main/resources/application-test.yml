@@ -1,0 +1,14 @@
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    #数据库方言
+    database-platform: org.hibernate.dialect.MariaDB53Dialect
+  datasource:
+    db1:
+      url: jdbc:mariadb://192.168.1.4:3306/auth_test
+      username: aidai
+      password: password
+      driver-class-name: org.mariadb.jdbc.Driver

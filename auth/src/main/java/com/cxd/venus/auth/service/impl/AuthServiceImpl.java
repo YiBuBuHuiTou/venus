@@ -1,7 +1,12 @@
 package com.cxd.venus.auth.service.impl;
 
 import com.cxd.venus.auth.bean.AuthBean;
+import com.cxd.venus.auth.dao.AccountRepository;
+import com.cxd.venus.auth.entity.Account;
 import com.cxd.venus.auth.service.AuthService;
+import com.cxd.venus.constant.ENCRYPT_TYPE;
+import com.cxd.venus.encrypt.CryptoUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,6 +18,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthServiceImpl implements AuthService {
 
+    private AccountRepository accountRepository;
+
+
+    @Autowired
+    public AuthServiceImpl(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
+    }
 
     /**
      * 验证用户
@@ -22,7 +34,16 @@ public class AuthServiceImpl implements AuthService {
      */
     @Override
     public boolean check(AuthBean authBean) {
-        return false;
+        boolean checkRes = false;
+        String accountName = authBean.getAccountName();
+        String tenantId = authBean.getTenantId();
+        String password = authBean.getPassword();
+        String passForSHA256 = CryptoUtils.hashAlgorithm(ENCRYPT_TYPE.SHA256, password);
+        Account account = accountRepository.findAccountByAccountNameAndTenantIdAndPassword(accountName, tenantId, passForSHA256);
+        if (account != null) {
+            checkRes = true;
+        }
+        return checkRes;
     }
 
     /**
