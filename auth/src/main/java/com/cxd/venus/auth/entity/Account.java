@@ -42,6 +42,9 @@ public class Account implements Serializable {
     @Column(name = "security_key")
     private String securityKey;
 
+    @Column(name = "privilege")
+    private int privilege;
+
     @CreationTimestamp
     @Column(name = "create_date", updatable = false)
     private Date createDate;
@@ -49,6 +52,7 @@ public class Account implements Serializable {
     @Column(name = "update_date")
     @UpdateTimestamp
     private Date updateDate;
+
 
     /**********************************************************************************************************************************************************/
     /*******************************************   Getter And Setter   ****************************************************************************************/
@@ -100,6 +104,14 @@ public class Account implements Serializable {
 
     public void setSecurityKey(String securityKey) {
         this.securityKey = securityKey;
+    }
+
+    public int getPrivilege() {
+        return privilege;
+    }
+
+    public void setPrivilege(int privilege) {
+        this.privilege = privilege;
     }
 
     public Date getCreateDate() {

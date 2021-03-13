@@ -10,5 +10,5 @@ import org.springframework.stereotype.Service;
  * @Version 1.0
  **/
 @Service
-public class PawwordServiceImpl implements PasswordService {
+public class PasswordServiceImpl implements PasswordService {
 }

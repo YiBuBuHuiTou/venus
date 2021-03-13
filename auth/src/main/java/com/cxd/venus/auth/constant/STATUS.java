@@ -1,4 +1,4 @@
-package com.cxd.venus.auth.enum
+package com.cxd.venus.auth.constant;
 
 /**
  * @Author YiBuBuHuiTou
@@ -6,7 +6,13 @@ package com.cxd.venus.auth.enum
  * @Date 2021/3/10 19:24
  * @Version 1.0
  **/
-enum class ERROR_TYPE {
+public enum  STATUS {
+
+    DEFAULT,
+
+    SUCCESS,
+
+    ERROR,
 
     ACCOUNT_NOT_FOUND,
 

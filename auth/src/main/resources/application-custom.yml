@@ -1,0 +1,7 @@
+
+spring:
+  custom:
+    #默认租户
+    defaultTenant: DEFAULT
+    #默认权限
+    defaultPrivilege: 0

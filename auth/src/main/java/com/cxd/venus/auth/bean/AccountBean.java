@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @Date 2021/3/10 19:43
  * @Version 1.0
  **/
-public class AuthBean implements Serializable {
+public class AccountBean implements Serializable {
     // 序列化类版本号
     private static final long serialVersionUID = 1L;
 
@@ -24,6 +24,13 @@ public class AuthBean implements Serializable {
 
     // 秘钥
     private String securityKey;
+
+    //描述
+    private String description;
+
+    //状态
+    private int status;
+
 
     public String getAccountName() {
         return accountName;
@@ -55,5 +62,21 @@ public class AuthBean implements Serializable {
 
     public void setSecurityKey(String securityKey) {
         this.securityKey = securityKey;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

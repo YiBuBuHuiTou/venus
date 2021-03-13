@@ -1,6 +1,7 @@
 package com.cxd.venus.auth.service;
 
-import com.cxd.venus.auth.bean.AuthBean;
+import com.cxd.venus.auth.bean.AccountBean;
+import com.cxd.venus.auth.constant.STATUS;
 
 /**
  * @Author YiBuBuHuiTou
@@ -12,24 +13,24 @@ public interface AuthService {
 
     /**
      * 验证用户(租户)
-     * @param authBean
+     * @param accountBean
      * @return
      */
-    boolean check(AuthBean authBean);
+    boolean check(AccountBean accountBean);
 
     /**
      * 验证用户
-     * @param authBean
+     * @param accountBean
      * @return
      */
-    boolean checkWithoutTenant(AuthBean authBean);
+    boolean checkWithoutTenant(AccountBean accountBean);
 
     /**
      * 验证失败后的检查
-     * @param authBean
+     * @param accountBean
      * @return
      */
-    int checkError(AuthBean authBean);
+    STATUS checkError(AccountBean accountBean);
 
 
 }

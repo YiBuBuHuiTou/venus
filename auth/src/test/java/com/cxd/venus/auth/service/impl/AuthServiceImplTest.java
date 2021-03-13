@@ -1,6 +1,6 @@
 package com.cxd.venus.auth.service.impl;
 
-import com.cxd.venus.auth.bean.AuthBean;
+import com.cxd.venus.auth.bean.AccountBean;
 import com.cxd.venus.auth.entity.Account;
 import com.cxd.venus.auth.service.AccountService;
 import com.cxd.venus.auth.service.AuthService;
@@ -24,23 +24,23 @@ class AuthServiceImplTest {
     @Autowired
     private AccountService accountService;
 
-    @BeforeAll
-    void addAccount() {
-        Account account = new Account();
-        account.setAccountName("Account_1");
-        account.setPassword(CryptoUtils.hashAlgorithm(ENCRYPT_TYPE.SHA256, "Account_1"));
-        account.setTenantId("TenantID");
-        boolean flag = accountService.addAccount(account);
-        assertEquals(flag, true);
-    }
+//    @BeforeAll
+//    void addAccount() {
+//        AccountBean accountBean = new AccountBean();
+//        accountBean.setAccountName("Account_1");
+//        accountBean.setPassword(CryptoUtils.hashAlgorithm(ENCRYPT_TYPE.SHA256, "Account_1"));
+//        accountBean.setTenantId("TenantID");
+//        boolean flag = accountService.addAccount(accountBean);
+//        assertEquals(flag, true);
+//    }
 
     @Test
     void check() {
-        AuthBean authBean = new AuthBean();
-        authBean.setAccountName("Account_1");
-        authBean.setPassword("Account_1");
-        authBean.setTenantId("TenantID");
-        assertEquals(authService.check(authBean), true);
+        AccountBean accountBean = new AccountBean();
+        accountBean.setAccountName("Account_1");
+        accountBean.setPassword("Account_1");
+        accountBean.setTenantId("TenantID");
+        assertEquals(authService.check(accountBean), true);
     }
 
     @Test

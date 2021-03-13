@@ -1,6 +1,6 @@
 package com.cxd.venus.auth.controller;
 
-import com.cxd.venus.auth.bean.AuthBean;
+import com.cxd.venus.auth.bean.AccountBean;
 import com.cxd.venus.auth.bean.ResponseBean;
 import com.cxd.venus.auth.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +27,15 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = "/auth/check", method = RequestMethod.POST)
-    public ResponseBean auth(@RequestBody  AuthBean authBean) {
-        boolean isPass = authService.check(authBean);
+    public ResponseBean auth(@RequestBody AccountBean accountBean) {
+        boolean isPass = authService.check(accountBean);
 
         return null;
     }
 
     @RequestMapping(value = "/auth/authWithoutTenant", method = RequestMethod.POST)
-    public ResponseBean authWithoutTenant(@RequestBody  AuthBean authBean) {
-        boolean isPass = authService.checkWithoutTenant(authBean);
+    public ResponseBean authWithoutTenant(@RequestBody AccountBean accountBean) {
+        boolean isPass = authService.checkWithoutTenant(accountBean);
 
         return null;
     }
