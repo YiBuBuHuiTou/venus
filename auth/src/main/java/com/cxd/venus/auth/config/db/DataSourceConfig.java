@@ -20,14 +20,14 @@ import javax.sql.DataSource;
 public class DataSourceConfig {
 
     //主数据源配置 ds1数据源
+
+//    @Bean(name = "ds2DataSourceProperties")
+//    @ConfigurationProperties(prefix = "spring.datasource.db2")
+//    public DataSourceProperties ds2DataSourceProperties(){
+//        return new DataSourceProperties();
+//    }
+
     @Primary
-    @Bean(name = "ds2DataSourceProperties")
-    @ConfigurationProperties(prefix = "spring.datasource.db2")
-    public DataSourceProperties ds2DataSourceProperties(){
-        return new DataSourceProperties();
-    }
-
-
     @Bean(name = "ds1DataSourceProperties")
     @ConfigurationProperties(prefix = "spring.datasource.db1")
     public DataSourceProperties ds1DataSourceProperties(){

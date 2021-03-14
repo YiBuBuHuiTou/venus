@@ -2,6 +2,7 @@ package com.cxd.venus.auth.service.impl;
 
 import com.cxd.venus.auth.bean.AccountBean;
 import com.cxd.venus.auth.config.AppDefault;
+import com.cxd.venus.auth.config.policy.AccountPolicy;
 import com.cxd.venus.auth.dao.AccountRepository;
 import com.cxd.venus.auth.entity.Account;
 import com.cxd.venus.auth.service.AccountService;
@@ -25,10 +26,13 @@ public class AccountServiceImpl implements AccountService {
 
     private AppDefault appDefault;
 
+    private AccountPolicy accountPolicy;
+
     @Autowired
-    public AccountServiceImpl(AccountRepository accountRepository, AppDefault appDefault) {
+    public AccountServiceImpl(AccountRepository accountRepository, AppDefault appDefault, AccountPolicy accountPolicy) {
         this.accountRepository = accountRepository;
         this.appDefault = appDefault;
+        this.accountPolicy = accountPolicy;
     }
 
     /**
@@ -43,11 +47,16 @@ public class AccountServiceImpl implements AccountService {
         //设置用户名
         String accountName = accountBean.getAccountName();
         Assert.hasText(accountName, "用户名为空");
+        if (!accountPolicy.checkAccountName(null, accountName)) {
+            return false;
+        }
         account.setAccountName(accountName);
 
         //设置SHA256加密后的密码
         String password = accountBean.getPassword();
-        //TODO 判断密码强度策略
+        if (!accountPolicy.checkPassword(null, password)) {
+            return false;
+        }
         account.setPassword(CryptoUtils.hashAlgorithm(ENCRYPT_TYPE.SHA256, password));
 
         //设置租户ID：默认ID "DEFAULT"
@@ -81,6 +90,24 @@ public class AccountServiceImpl implements AccountService {
      */
     @Override
     public boolean updateAccount(AccountBean accountBean) {
+        String accountId = accountBean.getAccountId();
+        String accountName = accountBean.getAccountName();
+        String password = accountBean.getPassword();
+
+        Account account = accountRepository.findAccountByAccountId(accountId);
+
+        if (accountPolicy.checkAccountName(accountId, accountName)) {
+            //TODO
+            return false;
+        }
+        if (accountPolicy.checkPassword(accountId, password)) {
+            //TODO
+            return false;
+        }
+        account.setAccountName(accountName);
+        account.setPassword(CryptoUtils.hashAlgorithm(ENCRYPT_TYPE.SHA256, password));
+        // 更新账号
+        accountRepository.save(account);
         return false;
     }
 
@@ -91,8 +118,8 @@ public class AccountServiceImpl implements AccountService {
      * @return
      */
     @Override
-    public boolean getAccountByAccountId(String accountId) {
-        return false;
+    public Account getAccountByAccountId(String accountId) {
+        return accountRepository.findAccountByAccountId(accountId);
     }
 
     /**
@@ -102,8 +129,8 @@ public class AccountServiceImpl implements AccountService {
      * @return
      */
     @Override
-    public boolean getAccountByAccountName(String accountName) {
-        return false;
+    public Account getAccountByAccountName(String accountName) {
+        return accountRepository.findAccountByAccountName(accountName);
     }
 
     /**
@@ -114,6 +141,7 @@ public class AccountServiceImpl implements AccountService {
      */
     @Override
     public boolean delAccountByAccountId(String accountId) {
+        //TODO
         return false;
     }
 
@@ -125,6 +153,7 @@ public class AccountServiceImpl implements AccountService {
      */
     @Override
     public boolean delAccountByAccountName(String accountName) {
+        // TODO
         return false;
     }
 
@@ -136,6 +165,18 @@ public class AccountServiceImpl implements AccountService {
      */
     @Override
     public boolean destroyAccount(String accountId) {
+        accountRepository.deleteById(accountId);
         return false;
+    }
+
+    /**
+     * check用户名是否有效
+     *
+     * @param accountName
+     * @return
+     */
+    @Override
+    public boolean checkAccountNameAvailable(String accountName) {
+        return accountPolicy.checkAccountName(accountName);
     }
 }

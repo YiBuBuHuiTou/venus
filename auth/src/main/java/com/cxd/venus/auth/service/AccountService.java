@@ -1,6 +1,7 @@
 package com.cxd.venus.auth.service;
 
 import com.cxd.venus.auth.bean.AccountBean;
+import com.cxd.venus.auth.entity.Account;
 
 /**
  * @Author YiBuBuHuiTou
@@ -29,14 +30,14 @@ public interface AccountService {
      * @param accountId
      * @return
      */
-    boolean getAccountByAccountId(String accountId);
+    Account getAccountByAccountId(String accountId);
 
     /**
      * 查询账号
      * @param accountName
      * @return
      */
-    boolean getAccountByAccountName(String accountName);
+    Account getAccountByAccountName(String accountName);
 
     /**
      * 删除账号
@@ -58,5 +59,13 @@ public interface AccountService {
      * @return
      */
     boolean destroyAccount(String accountId);
+
+    /**
+     * check用户名是否有效
+     * @param accountName
+     * @return
+     */
+    boolean checkAccountNameAvailable(String accountName);
+
 
 }

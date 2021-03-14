@@ -26,8 +26,8 @@ class AccountServiceImplTest {
         accountbean.setAccountName("Account_1"+new Random().nextFloat());
         accountbean.setTenantId("DEFAULT");
         accountbean.setPassword(CryptoUtils.hashAlgorithm(ENCRYPT_TYPE.SHA256, "Account_1"));
-//        accountbean.setTenantId("TenantID");
+        accountbean.setTenantId("TenantID");
         boolean flag = accountService.addAccount(accountbean);
-        assertEquals(flag, true);
+        assertEquals(true, flag);
     }
 }

@@ -13,6 +13,9 @@ public class AccountBean implements Serializable {
     // 序列化类版本号
     private static final long serialVersionUID = 1L;
 
+    //账号ID
+    private String accountId;
+
     //用户ID
     private String accountName;
 
@@ -29,8 +32,15 @@ public class AccountBean implements Serializable {
     private String description;
 
     //状态
-    private int status;
+    private int privilege;
 
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
 
     public String getAccountName() {
         return accountName;
@@ -72,11 +82,11 @@ public class AccountBean implements Serializable {
         this.description = description;
     }
 
-    public int getStatus() {
-        return status;
+    public int getPrivilege() {
+        return privilege;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setPrivilege(int privilege) {
+        this.privilege = privilege;
     }
 }
