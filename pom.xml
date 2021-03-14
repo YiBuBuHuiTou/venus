@@ -33,6 +33,7 @@
         <venus.common.version>1.0-SNAPSHOT</venus.common.version>
         <!-- spring cloud alibaba version -->
         <venus.cloud.version>2.2.5.RELEASE</venus.cloud.version>
+        <venus.swagger.version>2.9.2</venus.swagger.version>
     </properties>
 
     <dependencies>
@@ -74,7 +75,17 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
+            <!-- swagger -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${venus.swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${venus.swagger.version}</version>
+            </dependency>
         </dependencies>
 
 
