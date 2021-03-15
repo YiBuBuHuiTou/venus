@@ -18,6 +18,7 @@ public class AppDefault {
 
     private int defaultPrivilege;
 
+    private int redisTimeOut;
 
     public String getDefaultTenant() {
         return defaultTenant;
@@ -33,5 +34,13 @@ public class AppDefault {
 
     public void setDefaultPrivilege(int defaultPrivilege) {
         this.defaultPrivilege = defaultPrivilege;
+    }
+
+    public int getRedisTimeOut() {
+        return redisTimeOut;
+    }
+
+    public void setRedisTimeOut(int redisTimeOut) {
+        this.redisTimeOut = redisTimeOut;
     }
 }
