@@ -59,13 +59,13 @@ public class RedisConfig {
 
     @Bean("redisConfig1")
     public RedisStandaloneConfiguration redisConfig1(@Value("${spring.redis.host}") String host, @Value("${spring.redis.port}") int port,
-                                                     @Value("${spring.redis.db}") int db, @Value("${spring.redis.password}") String password) {
+                                                     @Value("${spring.redis.database}") int db, @Value("${spring.redis.password}") String password) {
         return generateRedisConfig(host, port, db, password);
     }
 
     @Bean("redisConfig2")
     public RedisStandaloneConfiguration redisConfig2(@Value("${spring.redis2.host}") String host, @Value("${spring.redis2.port}") int port,
-                                                     @Value("${spring.redis2.db}") int db, @Value("${spring.redis2.password}") String password) {
+                                                     @Value("${spring.redis2.database}") int db, @Value("${spring.redis2.password}") String password) {
         return generateRedisConfig(host, port, db, password);
     }
 
