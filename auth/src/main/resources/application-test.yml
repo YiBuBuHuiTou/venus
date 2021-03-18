@@ -12,3 +12,33 @@ spring:
       username: aidai
       password: password
       driver-class-name: org.mariadb.jdbc.Driver
+  redis:
+    #redis 配置[缓存redis]
+    host: 192.168.1.4
+    port: 6379
+    password: password
+    database: 0
+    lettuce:
+      pool:
+        # 最大活跃链接数 默认8
+        max-active: 8
+        # 最大空闲连接数 默认8
+        max-idle: 8
+        # 最小空闲连接数 默认0
+        min-idle: 0
+
+  redis2:
+    #redis 配置[手动操作redis]
+    host: 192.168.1.4
+    port: 6379
+    password: password
+    database: 1
+
+
+  custom:
+    #默认租户
+    defaultTenant: DEFAULT
+    #默认权限
+    defaultPrivilege: 1
+    #redis timeout (min)
+    redisTimeOut: 15

@@ -59,4 +59,26 @@ public interface AccountRepository extends JpaRepository<Account, String> {
      * @return
      */
     Account findAccountByAccountNameAndTenantIdAndPassword(String accountName, String tenantId, String password);
+
+    /**
+     * 判断用户名是否存在
+     * @param accountId
+     * @param accountName
+     * @return
+     */
+    boolean existsAccountByAccountIdAndAccountName(String accountId, String accountName);
+
+    /**
+     * 判断用户名是否存在
+     * @param accountName
+     * @return
+     */
+    boolean existsAccountByAccountName(String accountName);
+
+    /**
+     * 判断用户名是否存在
+     * @param accountId
+     * @return
+     */
+    boolean existsAccountByAccountId(String accountId);
 }

@@ -108,7 +108,9 @@ public class RedisConfig {
     public RedisTemplate redisTemplate2(@Qualifier("factory2") RedisConnectionFactory factory) {
         return generateRedisTemplate(factory);
     }
+
     @Bean
+    @Primary
     public CacheManager cacheManager(@Qualifier("redisTemplate1") RedisTemplate<String, Object> redisTemplate) {
         RedisCacheConfiguration defaultRedisConfiguration =
                 RedisCacheConfiguration

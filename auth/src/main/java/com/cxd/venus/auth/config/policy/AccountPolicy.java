@@ -31,16 +31,18 @@ public class AccountPolicy {
      * @return
      */
     public boolean checkAccountName(String accountId, String accountName) {
+        boolean active = true;
         if (!checkAccountName(accountName)) {
-            return false;
+            active =  false;
         }
-        Account existAccount = accountRepository.findAccountByAccountId(accountId);
-        Account existOAccount = accountRepository.findAccountByAccountName(accountName);
-        //判断用户名是否是旧名或者用户名不存在
-        if (!existAccount.getAccountName().equals(accountName)  && existOAccount != null) {
-            return false;
+        if (!StringUtils.isEmpty(accountId)) {
+            //判断用户名不是自己本名并且用户已存在则为无效用户名
+            if (!accountRepository.existsAccountByAccountIdAndAccountName(accountId, accountName) &&
+                    accountRepository.existsAccountByAccountName(accountName)) {
+                active =  false;
+            }
         }
-        return true;
+        return active;
     }
 
     public boolean checkAccountName(String accountName) {

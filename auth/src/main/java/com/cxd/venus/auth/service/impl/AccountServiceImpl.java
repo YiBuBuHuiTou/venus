@@ -9,6 +9,9 @@ import com.cxd.venus.auth.service.AccountService;
 import com.cxd.venus.constant.ENCRYPT_TYPE;
 import com.cxd.venus.encrypt.CryptoUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
@@ -20,6 +23,7 @@ import org.springframework.util.StringUtils;
  * @Version 1.0
  **/
 @Service
+@CacheConfig(cacheNames = "account_cache", cacheManager = "cacheManager")
 public class AccountServiceImpl implements AccountService {
 
     private AccountRepository accountRepository;
@@ -118,6 +122,7 @@ public class AccountServiceImpl implements AccountService {
      * @return
      */
     @Override
+    @Cacheable(value = "account", key = "#accountId")
     public Account getAccountByAccountId(String accountId) {
         return accountRepository.findAccountByAccountId(accountId);
     }
@@ -129,6 +134,7 @@ public class AccountServiceImpl implements AccountService {
      * @return
      */
     @Override
+    @Cacheable(value = "account", key = "#accountName")
     public Account getAccountByAccountName(String accountName) {
         return accountRepository.findAccountByAccountName(accountName);
     }
@@ -140,6 +146,7 @@ public class AccountServiceImpl implements AccountService {
      * @return
      */
     @Override
+    @CacheEvict(value = "account", allEntries = true)
     public boolean delAccountByAccountId(String accountId) {
         //TODO
         return false;
@@ -152,6 +159,7 @@ public class AccountServiceImpl implements AccountService {
      * @return
      */
     @Override
+    @CacheEvict(value = "account", allEntries = true)
     public boolean delAccountByAccountName(String accountName) {
         // TODO
         return false;
@@ -164,6 +172,7 @@ public class AccountServiceImpl implements AccountService {
      * @return
      */
     @Override
+    @CacheEvict(value = "account", allEntries = true)
     public boolean destroyAccount(String accountId) {
         accountRepository.deleteById(accountId);
         return false;

@@ -2,7 +2,7 @@
 spring:
   redis:
     #redis 配置[缓存redis]
-    host: 193.168.1.4
+    host: 192.168.1.4
     port: 6379
     password: password
     database: 0
@@ -17,7 +17,7 @@ spring:
 
   redis2:
     #redis 配置[手动操作redis]
-    host: 193.168.1.4
+    host: 192.168.1.4
     port: 6379
     password: password
     database: 1

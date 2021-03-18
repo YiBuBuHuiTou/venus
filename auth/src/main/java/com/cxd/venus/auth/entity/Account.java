@@ -43,7 +43,7 @@ public class Account implements Serializable {
     private String securityKey;
 
     @Column(name = "privilege")
-    private int privilege;
+    private Integer privilege;
 
     @CreationTimestamp
     @Column(name = "create_date", updatable = false)
@@ -106,11 +106,11 @@ public class Account implements Serializable {
         this.securityKey = securityKey;
     }
 
-    public int getPrivilege() {
+    public Integer getPrivilege() {
         return privilege;
     }
 
-    public void setPrivilege(int privilege) {
+    public void setPrivilege(Integer privilege) {
         this.privilege = privilege;
     }
 
