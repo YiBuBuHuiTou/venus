@@ -46,12 +46,12 @@ public class Password implements Serializable {
         this.id = id;
     }
 
-    public String getUuid() {
-        return uuid;
+    public String getAccountId() {
+        return accountId;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
     }
 
     public String getPassword() {
