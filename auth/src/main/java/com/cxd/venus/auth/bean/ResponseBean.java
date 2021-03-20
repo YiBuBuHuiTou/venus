@@ -12,8 +12,12 @@ public class ResponseBean implements Serializable {
     // 序列化类版本号
     private static final long serialVersionUID = 1L;
 
+    // 动作
+    private String action;
+
     //状态码
     private String statusCode;
+
 
     //说明信息
     private String message;
@@ -23,6 +27,14 @@ public class ResponseBean implements Serializable {
 
     public String getStatusCode() {
         return statusCode;
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
     }
 
     public void setStatusCode(String statusCode) {

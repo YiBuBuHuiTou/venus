@@ -23,8 +23,8 @@ public class Password implements Serializable {
     @Column(name = "id", updatable = false)
     private long id;
 
-    @Column(name = "uuid", updatable = false)
-    private String uuid;
+    @Column(name = "account_id", updatable = false)
+    private String accountId;
 
     @Column(name = "password", updatable = false)
     private String password;

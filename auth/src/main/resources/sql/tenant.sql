@@ -11,7 +11,7 @@
  Target Server Version : 50568
  File Encoding         : 65001
 
- Date: 14/03/2021 19:38:54
+ Date: 20/03/2021 21:50:09
 */
 
 SET NAMES utf8mb4;
@@ -30,7 +30,8 @@ CREATE TABLE `tenant`  (
   `update_date` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `create_date` datetime NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`tenant_id`) USING BTREE,
-  UNIQUE INDEX `primiary_name`(`tenant_name`) USING BTREE
+  UNIQUE INDEX `primiary_name`(`tenant_name`) USING BTREE,
+  INDEX `select_by_owner`(`owner`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Compact;
 
 SET FOREIGN_KEY_CHECKS = 1;
