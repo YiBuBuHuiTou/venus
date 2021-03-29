@@ -2,16 +2,17 @@ package com.cxd.venus.auth.controller;
 
 import com.cxd.venus.auth.bean.AccountBean;
 import com.cxd.venus.auth.bean.ResponseBean;
+import com.cxd.venus.auth.constant.ACTION;
+import com.cxd.venus.auth.constant.STATUS;
 import com.cxd.venus.auth.service.AuthService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author YiBuBuHuiTou
@@ -25,22 +26,42 @@ public class AuthenticationController {
     // 认证service
     private AuthService authService;
 
+    private ResponseBean responseBean;
+
+    private ObjectMapper objectMapper;
+
     @Autowired
-    public AuthenticationController(AuthService authService) {
+    public AuthenticationController(AuthService authService, ResponseBean responseBean, ObjectMapper objectMapper) {
         this.authService = authService;
+        this.responseBean = responseBean;
+        this.objectMapper = objectMapper;
     }
 
     @RequestMapping(value = "/auth/check", method = RequestMethod.POST)
-    public ResponseBean auth(@RequestBody AccountBean accountBean) {
+    public String auth(@RequestBody AccountBean accountBean) throws JsonProcessingException {
         boolean isPass = authService.check(accountBean);
-
-        return null;
+        responseBean.setAction(ACTION.AUTH.getName());
+        if (isPass) {
+            responseBean.setResult(STATUS.SUCCESS.getName());
+            responseBean.setStatusCode("VENUS200");
+        } else {
+            responseBean.setResult(STATUS.ERROR.getName());
+            responseBean.setStatusCode("VENUS400");
+        }
+        return objectMapper.writeValueAsString(responseBean);
     }
 
     @RequestMapping(value = "/auth/authWithoutTenant", method = RequestMethod.POST)
-    public ResponseBean authWithoutTenant(@RequestBody AccountBean accountBean) {
+    public String authWithoutTenant(@RequestBody AccountBean accountBean) throws JsonProcessingException {
         boolean isPass = authService.checkWithoutTenant(accountBean);
-
-        return null;
+        responseBean.setAction(ACTION.AUTH.getName());
+        if (isPass) {
+            responseBean.setResult(STATUS.SUCCESS.getName());
+            responseBean.setStatusCode("VENUS201");
+        } else {
+            responseBean.setResult(STATUS.ERROR.getName());
+            responseBean.setStatusCode("VENUS401");
+        }
+        return objectMapper.writeValueAsString(responseBean);
     }
 }

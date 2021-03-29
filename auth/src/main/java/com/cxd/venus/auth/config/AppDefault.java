@@ -15,7 +15,6 @@ public class AppDefault {
 
     private String defaultTenant;
 
-
     private int defaultPrivilege;
 
     private int redisTimeOut;

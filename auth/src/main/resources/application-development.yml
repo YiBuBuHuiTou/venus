@@ -1,4 +1,5 @@
 
+
 spring:
   redis:
     #redis 配置[缓存redis]
@@ -40,4 +41,13 @@ spring:
       password: password
       driver-class-name: org.mariadb.jdbc.Driver
 
-
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: beans
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
