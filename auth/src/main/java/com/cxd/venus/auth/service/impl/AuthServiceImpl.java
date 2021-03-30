@@ -31,17 +31,16 @@ public class AuthServiceImpl implements AuthService {
     /**
      * 验证用户
      *
-     * @param authBean
+     * @param accountName
+     * @param tenantId
+     * @param password
      * @return
      */
     @Override
-    public boolean check(AccountBean authBean) {
+    public boolean check(String accountName, String tenantId, String password) {
         boolean checkRes = false;
-        String accountName = authBean.getAccountName();
         Assert.hasText(accountName, "用户名输入为空");
-        String tenantId = authBean.getTenantId();
         Assert.hasText(tenantId, "租户为空");
-        String password = authBean.getPassword();
         String passForSHA256 = CryptoUtils.hashAlgorithm(ENCRYPT_TYPE.SHA256, password);
         Account account = accountRepository.findAccountByAccountNameAndTenantIdAndPassword(accountName, tenantId, passForSHA256);
         if (account != null) {
@@ -53,18 +52,16 @@ public class AuthServiceImpl implements AuthService {
     /**
      * 验证用户
      *
-     * @param authBean
+     * @param accountId
+     * @param password
      * @return
      */
     @Override
-    public boolean checkWithoutTenant(AccountBean authBean) {
+    public boolean checkWithoutTenant(String accountId, String password) {
         boolean checkRes = false;
-        String accountName = authBean.getAccountName();
-        Assert.hasText(accountName, "用户名输入为空");
-        String password = authBean.getPassword();
+        Assert.hasText(accountId, "用户名Id为空");
         String passForSHA256 = CryptoUtils.hashAlgorithm(ENCRYPT_TYPE.SHA256, password);
-        Account account = accountRepository.findAccountByAccountNameAndPassword(accountName, passForSHA256);
-        if (account != null) {
+        if (accountRepository.existsAccountByAccountIdAndPassword(accountId, password)) {
             checkRes = true;
         }
         return checkRes;
@@ -73,23 +70,22 @@ public class AuthServiceImpl implements AuthService {
     /**
      * 验证失败后的检查
      *
-     * @param authBean
+     * @param accountName
+     * @param tenantId
+     * @param password
      * @return
      */
     @Override
-    public STATUS checkError(AccountBean authBean) {
-        String accountName = authBean.getAccountName();
-        Assert.hasText(accountName,"用户名输入为空");
+    public STATUS checkError(String accountName, String tenantId, String password) {
+        Assert.hasText(accountName,"用户名为空");
 
-        Account account = null;
-        account = accountRepository.findAccountByAccountName(accountName);
-        if (account == null) {
+        if (!accountRepository.existsAccountByAccountName(accountName)) {
             return STATUS.ACCOUNT_NOT_FOUND;
         }
-        if (checkWithoutTenant(authBean)) {
+        if (checkWithoutTenant(accountName, password)) {
             return STATUS.PASSWORD_NOT_MATCH;
         }
-        if (check(authBean)) {
+        if (check(accountName, tenantId, password)) {
             return STATUS.TENANT_NOT_FOUND;
         }
         return STATUS.DEFAULT;

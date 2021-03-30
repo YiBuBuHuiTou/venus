@@ -1,6 +1,7 @@
 package com.cxd.venus.auth.controller;
 
 import com.cxd.venus.auth.bean.AccountBean;
+import com.cxd.venus.auth.bean.AuthDto;
 import com.cxd.venus.auth.bean.ResponseBean;
 import com.cxd.venus.auth.constant.ACTION;
 import com.cxd.venus.auth.constant.STATUS;
@@ -13,6 +14,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * @Author YiBuBuHuiTou
@@ -26,20 +28,20 @@ public class AuthenticationController {
     // 认证service
     private AuthService authService;
 
-    private ResponseBean responseBean;
-
     private ObjectMapper objectMapper;
 
     @Autowired
-    public AuthenticationController(AuthService authService, ResponseBean responseBean, ObjectMapper objectMapper) {
+    public AuthenticationController(AuthService authService, ObjectMapper objectMapper) {
         this.authService = authService;
-        this.responseBean = responseBean;
         this.objectMapper = objectMapper;
     }
 
+    @ApiOperation("认证接口")
     @RequestMapping(value = "/auth/check", method = RequestMethod.POST)
-    public String auth(@RequestBody AccountBean accountBean) throws JsonProcessingException {
-        boolean isPass = authService.check(accountBean);
+    public String auth( @RequestBody AuthDto authDto) throws JsonProcessingException {
+        boolean isPass = authService.check(authDto.getAccountName(), authDto.getTenantId(), authDto.getPassword());
+
+        ResponseBean responseBean = new ResponseBean();
         responseBean.setAction(ACTION.AUTH.getName());
         if (isPass) {
             responseBean.setResult(STATUS.SUCCESS.getName());
@@ -52,8 +54,10 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = "/auth/authWithoutTenant", method = RequestMethod.POST)
-    public String authWithoutTenant(@RequestBody AccountBean accountBean) throws JsonProcessingException {
-        boolean isPass = authService.checkWithoutTenant(accountBean);
+    public String authWithoutTenant(@RequestBody AuthDto authDto) throws JsonProcessingException {
+        boolean isPass = authService.checkWithoutTenant(authDto.getAccountId(), authDto.getPassword());
+
+        ResponseBean responseBean = new ResponseBean();
         responseBean.setAction(ACTION.AUTH.getName());
         if (isPass) {
             responseBean.setResult(STATUS.SUCCESS.getName());

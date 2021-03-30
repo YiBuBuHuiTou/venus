@@ -81,4 +81,13 @@ public interface AccountRepository extends JpaRepository<Account, String> {
      * @return
      */
     boolean existsAccountByAccountId(String accountId);
+
+
+    /**
+     * 判断用户名是否存在
+     * @param accountId
+     * @param password
+     * @return
+     */
+    boolean existsAccountByAccountIdAndPassword(String accountId, String password);
 }

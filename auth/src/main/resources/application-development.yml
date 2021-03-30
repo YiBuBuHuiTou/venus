@@ -24,10 +24,10 @@ spring:
     database: 1
 
 
-  security:
-    user:
-      name: admin
-      password: admin
+#  security:
+#    user:
+#      name: admin
+#      password: admin
   jpa:
     hibernate:
       ddl-auto: update

@@ -40,7 +40,7 @@ class AuthServiceImplTest {
         accountBean.setAccountName("Account_1");
         accountBean.setPassword("Account_1");
         accountBean.setTenantId("TenantID");
-        assertEquals(authService.check(accountBean), true);
+        assertEquals(true, authService.check(accountBean.getAccountName(), accountBean.getPassword(), accountBean.getPassword()));
     }
 
     @Test

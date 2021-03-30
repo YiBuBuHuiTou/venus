@@ -13,24 +13,29 @@ public interface AuthService {
 
     /**
      * 验证用户(租户)
-     * @param accountBean
+     * @param accountName
+     * @param tenantId
+     * @param password
      * @return
      */
-    boolean check(AccountBean accountBean);
+    boolean check(String accountName, String tenantId, String password);
 
     /**
      * 验证用户
-     * @param accountBean
+     * @param accountId
+     * @param password
      * @return
      */
-    boolean checkWithoutTenant(AccountBean accountBean);
+    boolean checkWithoutTenant(String accountId, String password);
 
     /**
      * 验证失败后的检查
-     * @param accountBean
+     * @param accountName
+     * @param tenantId
+     * @param password
      * @return
      */
-    STATUS checkError(AccountBean accountBean);
+    STATUS checkError(String accountName, String tenantId, String password);
 
 
 }
