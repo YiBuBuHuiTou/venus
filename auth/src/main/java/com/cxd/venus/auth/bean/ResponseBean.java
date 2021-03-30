@@ -15,9 +15,7 @@ import java.io.Serializable;
  * @Date 2021/3/10 19:29
  * @Version 1.0
  **/
-@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE, proxyMode = ScopedProxyMode.TARGET_CLASS)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-@Component
 public class ResponseBean implements Serializable {
     // 序列化类版本号
     private static final long serialVersionUID = 1L;
