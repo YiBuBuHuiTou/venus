@@ -1,6 +1,7 @@
 package com.cxd.venus.auth.service;
 
 import com.cxd.venus.auth.bean.AccountBean;
+import com.cxd.venus.auth.bean.TenantBean;
 
 /**
  * @Author YiBuBuHuiTou
@@ -10,4 +11,11 @@ import com.cxd.venus.auth.bean.AccountBean;
  **/
 public interface TenantService {
 
+    boolean addTenant(TenantBean tenantBean);
+
+    boolean delTenant(String tenantId, String tennatUser);
+
+    boolean updateTenant(TenantBean tenantBean);
+
+    boolean checkTenantExists(String tennatName);
 }

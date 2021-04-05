@@ -34,4 +34,10 @@ public interface TenantRespository extends JpaRepository<Tenant, String> {
      */
     List<Tenant> findTenantsByOwner(String accountId);
 
+    /**
+     * check 租户是否存在
+     * @param tenantName
+     * @return
+     */
+    boolean existsTenantByTenantName(String tenantName);
 }

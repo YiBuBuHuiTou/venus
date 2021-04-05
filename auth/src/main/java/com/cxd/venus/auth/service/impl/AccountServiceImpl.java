@@ -68,13 +68,18 @@ public class AccountServiceImpl implements AccountService {
         if(!StringUtils.hasText(tenantId)) {
             tenantId = appDefault.getDefaultTenant();
         }
+
         account.setTenantId(tenantId);
 
         //设置描述
         account.setDescription(accountBean.getDescription());
 
         //设置账号权限：初始权限：0
-        account.setPrivilege(appDefault.getDefaultPrivilege());
+        if(accountBean.getPrivilege() == 0) {
+            account.setPrivilege(appDefault.getDefaultPrivilege());
+        } else {
+            account.setPrivilege(accountBean.getPrivilege());
+        }
 
         Account result = null;
         result = accountRepository.save(account);

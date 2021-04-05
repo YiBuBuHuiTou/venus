@@ -117,7 +117,7 @@ public class RedisConfig {
                 .defaultCacheConfig()
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(redisTemplate.getStringSerializer()))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(redisTemplate.getValueSerializer()))
-                .disableCachingNullValues()
+                //.disableCachingNullValues()  禁止缓存null值，如果开启，缓存方法返回null时会报错
                 .entryTtl(Duration.ofMinutes(appDefault.getRedisTimeOut()));
         RedisCacheManager redisCacheManager =
                 RedisCacheManager.RedisCacheManagerBuilder.

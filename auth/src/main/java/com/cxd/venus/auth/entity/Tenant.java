@@ -34,6 +34,9 @@ public class Tenant implements Serializable {
     @Column(name = "owner", nullable = false)
     private String owner;
 
+    @Column(name = "status", nullable = false)
+    private int status;
+
     @Column(name = "description")
     private String description;
 
@@ -80,6 +83,14 @@ public class Tenant implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public Date getUpdateDate() {
